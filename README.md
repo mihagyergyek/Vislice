@@ -1,2 +1,3 @@
 # Vislice
-Najtemačnejša otroška igra
+Najtemačnejša otroška igra.
+Saj se samo hecam.
