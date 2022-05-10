@@ -114,6 +114,3 @@ def pozeni_vmesnik():
         pozeni_vmesnik()
 
 pozeni_vmesnik()
-
-class SeEnVmesnik:
-    pass

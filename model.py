@@ -1,10 +1,11 @@
 STEVILO_DOVOLJENIH_NAPAK = 9
 PRAVILNA_CRKA, PONOVLJENA_CRKA, NAPACNA_CRKA = '+', 'o', '-'
 ZMAGA, PORAZ = 'W', 'X'
+ZACETEK = 'Z'
 
 class Igra:
 
-    def __init__(self, geslo, crke=[]):
+    def __init__(self, geslo, crke=None):
         self.geslo = geslo.upper()
         if crke is not None:
             self.crke = crke
@@ -63,6 +64,27 @@ import random
 def nova_igra():
     geslo = random.choice(bazen_besed)
     return Igra(geslo)
+
+class Vislice:
+    def __init__(self):
+        self.igre = {}
+
+    def prost_id_igre(self):
+        if not self.igre:
+            return 0
+        else:
+            return max(self.igre.keys()) + 1
+
+    def nova_igra(self):
+        i = self.prost_id_igre()
+        igra = nova_igra()
+        self.igre[i] = (igra, ZACETEK)
+        return i
+
+    def ugibaj(self, i, crka):
+        igra, stanje = self.igre[i]
+        stanje = igra.ugibaj(crka)
+        self.igre[i] = (igra, stanje)
 
 #with open("besede.txt", encoding='utf-8') as d:
 #   bazen_besed = d.read().split('\n')        
