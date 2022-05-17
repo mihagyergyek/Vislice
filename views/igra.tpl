@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<body>
-
-  <h1>Vislice</h1>
-
+% rebase('base.tpl', title = "Vislice")
 Geslo: {{ geslo }}<br/>
 Nepravilni ugibi: {{ nepravilni }}<br/>
 <img src="/img/{{obesenost}}.jpg" alt="obesanje">
@@ -14,16 +8,13 @@ Nepravilni ugibi: {{ nepravilni }}<br/>
 </form>
 % elif stanje == model.ZMAGA:
 Čestitke, zmagali ste! Bi želeli igrati še enkrat?
-<form action="/igra/" method="post">
+<form action="/nova_igra/" method="post">
     <button type="submit">Nova igra</button>
 </form>
 % elif stanje == model.PORAZ:
-Več sreče prihodnjič., geslo je bilo <b>{{celo_geslo}}</b>
+Več sreče prihodnjič, geslo je bilo <b>{{celo_geslo}}</b>
 Bi želeli igrati še enkrat?
-<form action="/igra/" method="post">
+<form action="/nova_igra/" method="post">
     <button type="submit">Nova igra</button>
 </form>
 % end
-</body>
-
-</html>

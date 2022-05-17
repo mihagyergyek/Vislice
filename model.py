@@ -1,7 +1,10 @@
+import json
+
 STEVILO_DOVOLJENIH_NAPAK = 9
 PRAVILNA_CRKA, PONOVLJENA_CRKA, NAPACNA_CRKA = '+', 'o', '-'
 ZMAGA, PORAZ = 'W', 'X'
 ZACETEK = 'Z'
+DATOTEKA_S_STANJEM = "stanje.json"
 
 class Igra:
 
@@ -66,6 +69,8 @@ def nova_igra():
     return Igra(geslo)
 
 class Vislice:
+    datoteka_s_stanjem = DATOTEKA_S_STANJEM
+
     def __init__(self):
         self.igre = {}
 
@@ -85,6 +90,19 @@ class Vislice:
         igra, stanje = self.igre[i]
         stanje = igra.ugibaj(crka)
         self.igre[i] = (igra, stanje)
+
+    def nalozi_igre_iz_datoteke(self):
+        with open(self.datoteka_s_stanjem, encoding='utf-8') as d:
+            zapis = json.load(d)
+        for id_igre, ((geslo, crke), stanje) in zapis.items():
+            self.igre[id_igre] = (Igra(geslo, crke), stanje)
+
+    def zapisi_igre_v_datoteke(self):
+        igre = {}
+        for id_igre, (igra, stanje) in self.igre.items():
+            igre[id_igre] = ((igra.geslo, igra.crke), stanje)
+        with open(self.datoteka_s_stanjem, 'w', encoding='utf-8') as d:
+            json.dump(igre, d)
 
 #with open("besede.txt", encoding='utf-8') as d:
 #   bazen_besed = d.read().split('\n')        
